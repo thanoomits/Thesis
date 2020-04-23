@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>MOOC Home</h1>
+  <p>Welcome to MOOC, a website developed by <em>Me</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>The MOOC has the following record counts:</p>
+  <ul>
+    <li><strong>Courses:</strong> {{ num_courses }}</li>
+    <li><strong>Teachers:</strong> {{ num_postedby }}</li>
+  </ul>
+{% endblock %}

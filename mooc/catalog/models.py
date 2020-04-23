@@ -15,7 +15,6 @@ class User(models.Model):
     born_date = models.DateField(null=True, blank=True)
     email = models.EmailField(max_length=50)
     username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)   
 
     class Meta:
         ordering = ['last_name', 'first_name', 'username', 'email']
@@ -27,7 +26,10 @@ class User(models.Model):
         return f'{self.last_name}, {self.first_name}, {self.username}, {self.email}'
     
 
-class Teacher(models.Model):
+class Postedby(models.Model):
+    class Meta:
+        verbose_name_plural = "Posted by"
+    
     op = models.ForeignKey(User, on_delete=models.CASCADE)
     posted_date = models.DateField(auto_now_add=True)
     last_modified_date = models.DateField(auto_now=True)
@@ -36,7 +38,7 @@ class Teacher(models.Model):
         return f'{self.op}'
     
     def get_absolute_url(self):
-        return reverse('teacher-details', args=[str(self.op)])
+        return reverse('posted_by-details', args=[str(self.op)])
 
 class Course(models.Model):
     title = models.CharField(max_length=50)
@@ -45,8 +47,12 @@ class Course(models.Model):
     field = models.ManyToManyField(Field, help_text='Select a field for this course')
 
     def __str__(self):
-        return self.title
+        return f'{self.title}'
 
     def get_absolute_url(self):
         return reverse('course-detail', kwargs={'pk': self.pk})
+
+    def display_field(self):
+        return ', '.join(field.name for field in self.field.all()[:3])
+    display_field.short_description = 'Field'
     
