@@ -38,7 +38,7 @@ class Postedby(models.Model):
         return f'{self.op}'
     
     def get_absolute_url(self):
-        return reverse('posted_by-details', args=[str(self.op)])
+        return reverse('teacher-detail', kwargs={'pk': self.pk})
 
 class Course(models.Model):
     title = models.CharField(max_length=50)

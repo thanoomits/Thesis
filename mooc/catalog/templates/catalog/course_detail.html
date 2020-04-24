@@ -4,7 +4,7 @@
 {% block content %}
     <h1>Title: {{course.title}}</h1>
 
-    <p><strong>Teacher:</strong> <a href="">{{ course.teacher }}</a></p>
+    <p><strong>Teacher:</strong> <a href="{% url 'teacher-detail' course.teacher.pk %}">{{ course.teacher }}</a></p> 
     <p><strong>Summary:</strong> {{ course.summary }}</p>
     <p><strong>Field:</strong> {{ course.field.all|join:", " }}</p>  
 
