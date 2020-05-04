@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>User List</h1>
+  {% if user_list %}
+  <ul>
+    {% for user in user_list %}
+      <li>
+        <a href="{{ user.get_absolute_url }}">{{ user.last_name }} {{ user.first_name }}</a> 
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no active users in the mooc.</p>
+  {% endif %}       
+{% endblock %}

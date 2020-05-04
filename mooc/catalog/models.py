@@ -34,6 +34,10 @@ class Postedby(models.Model):
     posted_date = models.DateField(auto_now_add=True)
     last_modified_date = models.DateField(auto_now=True)
 
+    #@property
+    #def oplast_name(self):
+    #    return self.op.last_name
+    
     def __str__(self):
         return f'{self.op}'
     
@@ -56,3 +60,23 @@ class Course(models.Model):
         return ', '.join(field.name for field in self.field.all()[:3])
     display_field.short_description = 'Field'
     
+class MyCourse(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    last_accessed = models.DateField(auto_now=True)
+
+    CURRENT_STATUS = (
+        ('n', 'Not started'),
+        ('i', 'Incomplete'),
+        ('c', 'Completed'),
+    )
+
+    status = models.CharField(
+        max_length=1,
+        choices=CURRENT_STATUS,
+        blank=True,
+        default='n',
+        help_text='Courses taken'
+    )
+
+    def __str__(self):
+        return f'{self.course.title}'

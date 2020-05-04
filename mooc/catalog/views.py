@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from catalog.models import User, Field, Course, Postedby
 from django.views import generic
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 
@@ -25,9 +27,28 @@ class CourseListView(generic.ListView):
 class CourseDetailView(generic.DetailView):
     model = Course
 
-class PostedbyListView(generic.ListView):
-    model = Postedby
+class UserListView(generic.ListView):
+    model = User
     paginate_by = 2
 
-class PostedbyDetailView(generic.DetailView):
+class UserDetailView(generic.DetailView):
+    model = User
+
+#class PostedbyListView(generic.ListView):
+#    model = Postedby
+#    paginate_by = 2
+
+#class PostedbyDetailView(generic.DetailView):
+#    model = Postedby
+
+class PostedbyCreate(CreateView):
     model = Postedby
+    fields = '__all__'
+
+class PostedbyUpdate(UpdateView):
+    model = Postedby
+    fields = ['posted_date', 'last_modified_date']
+
+class PostedbyDelete(DeleteView):
+    model = Postedby
+    success_url = reverse_lazy('teachers')
