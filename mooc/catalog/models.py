@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Field(models.Model):
@@ -33,10 +34,6 @@ class Postedby(models.Model):
     op = models.ForeignKey(User, on_delete=models.CASCADE)
     posted_date = models.DateField(auto_now_add=True)
     last_modified_date = models.DateField(auto_now=True)
-
-    #@property
-    #def oplast_name(self):
-    #    return self.op.last_name
     
     def __str__(self):
         return f'{self.op}'
@@ -61,6 +58,7 @@ class Course(models.Model):
     display_field.short_description = 'Field'
     
 class MyCourse(models.Model):
+    active = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     last_accessed = models.DateField(auto_now=True)
 

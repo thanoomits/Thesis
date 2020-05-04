@@ -22,7 +22,7 @@ class FieldAdmin(admin.ModelAdmin):
 admin.site.register(Field, FieldAdmin)
 
 class MyCourseAdmin(admin.ModelAdmin):
-    list_display = ('course', 'last_accessed')
+    list_display = ('course', 'active', 'last_accessed')
     list_filter = ('status', 'last_accessed')
 admin.site.register(MyCourse, MyCourseAdmin)
 
