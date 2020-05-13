@@ -8,7 +8,7 @@
 
       {% for myco in mycourse_list %} 
       <li>
-        <a href="{% url 'course-detail' myco.course.pk %}">{{myco.course.title}}</a> ({{ myco.last_accessed }})        
+        <a href="{% url 'course-detail' myco.course.pk %}">{{myco.course.title}}</a> (Last accessed: {{ myco.last_accessed }})        
       </li>
       {% endfor %}
     </ul>

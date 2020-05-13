@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as AuthUser
 
 # Create your models here.
 class Field(models.Model):
@@ -58,7 +58,7 @@ class Course(models.Model):
     display_field.short_description = 'Field'
     
 class MyCourse(models.Model):
-    active = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, blank=True)
+    active = models.ForeignKey(AuthUser, on_delete=models.SET_NULL, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     last_accessed = models.DateField(auto_now=True)
 
@@ -75,6 +75,9 @@ class MyCourse(models.Model):
         default='n',
         help_text='Courses taken'
     )
+
+    class Meta:
+        ordering = ['last_accessed']
 
     def __str__(self):
         return f'{self.course.title}'

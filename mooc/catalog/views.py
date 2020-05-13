@@ -60,7 +60,6 @@ class ActiveCoursesByUserListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 2
 
     def get_queryset(self):
-        return MyCourse.objects.filter()
-        return MyCourse.objects.filter(active=self.user).filter(status__exact='i').order_by(last_accessed)
+        return MyCourse.objects.filter(active=self.request.user).filter(status__exact='i').order_by('-last_accessed')
 
 
