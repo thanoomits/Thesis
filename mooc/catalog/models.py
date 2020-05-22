@@ -58,7 +58,7 @@ class Course(models.Model):
     display_field.short_description = 'Field'
     
 class MyCourse(models.Model):
-    active = models.ForeignKey(AuthUser, on_delete=models.SET_NULL, null=True, blank=True)
+    active = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     last_accessed = models.DateField(auto_now=True)
 

@@ -8,10 +8,7 @@
             <li>
                 <a href="{{ course.get_absolute_url }}">{{course.title}}</a> ({{ course.teacher.last_name }} {{ course.teacher.first_name }})
                 {% if user.is_authenticated %}
-                    <form method="POST">
-                        {% csrf_token %}
-                        <button type="submit">Add to List!</button>
-                    </form>
+                    <a href="{% url 'add-course-to-list' course.id %}">Add to List!</a>
                 {% endif %}
             </li>
         {% endfor %}

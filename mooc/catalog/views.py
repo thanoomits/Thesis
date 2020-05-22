@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from catalog.models import User, Field, Course, Postedby, MyCourse
 from django.views import generic
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin   
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
@@ -21,7 +23,6 @@ def index(request):
 
     return render(request, 'index.html', context=context)
 
-
 class CourseListView(generic.ListView):
     model = Course
     paginate_by = 2
@@ -35,13 +36,6 @@ class UserListView(generic.ListView):
 
 class UserDetailView(generic.DetailView):
     model = User
-
-#class PostedbyListView(generic.ListView):
-#    model = Postedby
-#    paginate_by = 2
-
-#class PostedbyDetailView(generic.DetailView):
-#    model = Postedby
 
 class PostedbyCreate(CreateView):
     model = Postedby
@@ -61,4 +55,31 @@ class ActiveCoursesByUserListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 2
 
     def get_queryset(self):
-        return MyCourse.objects.filter(active=self.request.user).filter(status__exact='i').order_by('-last_accessed')
+        my_user = self.request.user
+        my_user = User.objects.get(username=my_user)
+
+        return MyCourse.objects.filter(active=my_user).filter(status__exact='i').order_by('-last_accessed')
+
+@login_required
+def addtolist(request, pk):
+    #print("Primary key of the course")
+    #print(pk)
+    course = get_object_or_404(Course, pk=pk)
+    #print(course.title)
+    #print("Logged in user")
+    #print(request.user)
+    current_user = request.user
+    current_user = User.objects.get(username=current_user)
+    current_course = Course.objects.get(title=course.title)
+
+    count = MyCourse.objects.filter(active=current_user, course=current_course).count()
+    #print(count)
+    if count==0:
+        add = MyCourse(active=current_user, course=current_course, status='i')
+        add.save()
+        messages.success(request, "List updated!")
+        #print("mphke")
+    #else:
+        #print("leitourgei")
+    
+    return redirect('my-active')

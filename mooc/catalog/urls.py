@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('courses/', views.CourseListView.as_view(), name='courses'),
     path('course/<int:pk>', views.CourseDetailView.as_view(), name='course-detail'),
+    path('course/<int:pk>/addtolist', views.addtolist, name='add-course-to-list'),
     path('teachers/', views.UserListView.as_view(), name='users'),
     path('teacher/<int:pk>', views.UserDetailView.as_view(), name='user-detail'),
     path('teacher/create', views.PostedbyCreate.as_view(), name='teacher-create'),
