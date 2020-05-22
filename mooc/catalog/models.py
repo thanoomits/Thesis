@@ -26,21 +26,6 @@ class User(models.Model):
     def __str__(self):
         return f'{self.last_name}, {self.first_name}, {self.username}, {self.email}'
     
-
-class Postedby(models.Model):
-    class Meta:
-        verbose_name_plural = "Posted by"
-    
-    op = models.ForeignKey(User, on_delete=models.CASCADE)
-    posted_date = models.DateField(auto_now_add=True)
-    last_modified_date = models.DateField(auto_now=True)
-    
-    def __str__(self):
-        return f'{self.op}'
-    
-    def get_absolute_url(self):
-        return reverse('teacher-detail', kwargs={'pk': self.pk})
-
 class Course(models.Model):
     title = models.CharField(max_length=50)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -56,6 +41,21 @@ class Course(models.Model):
     def display_field(self):
         return ', '.join(field.name for field in self.field.all()[:3])
     display_field.short_description = 'Field'
+
+class Postedby(models.Model):
+    class Meta:
+        verbose_name_plural = "Posted by"
+    
+    op = models.ForeignKey(User, on_delete=models.CASCADE)
+    courses = models.ForeignKey(Course, on_delete=models.CASCADE)
+    posted_date = models.DateField(auto_now_add=True)
+    last_modified_date = models.DateField(auto_now=True)
+    
+    def __str__(self):
+        return f'{self.op},{self.courses.title}'
+    
+    def get_absolute_url(self):
+        return reverse('teacher-detail', kwargs={'pk': self.pk})
     
 class MyCourse(models.Model):
     active = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)

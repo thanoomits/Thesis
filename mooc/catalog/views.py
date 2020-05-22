@@ -11,13 +11,13 @@ from django.http import HttpResponse
 
 def index(request):
     num_courses = Course.objects.all().count()
-    num_postedby = Postedby.objects.all().count()
+    num_users = User.objects.all().count()
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
 
     context = {
         'num_courses': num_courses,
-        'num_postedby': num_postedby,
+        'num_users': num_users,
         'num_visits': num_visits,
     }
 

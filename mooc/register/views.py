@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
+from catalog.models import User
+from django.contrib.auth.models import User as AuthUser
 
 # Create your views here.
 
