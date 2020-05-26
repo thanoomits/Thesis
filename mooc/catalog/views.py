@@ -71,5 +71,9 @@ def addtolist(request, pk):
     if count==0:
         add = MyCourse(active=current_user, course=current_course, status='i')
         add.save()
-        messages.success(request, "List updated!")    
-    return redirect('my-active')
+        messages.success(request, "List updated!")
+
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        messages.error(request,"This Course is already in your list!")
+        return redirect(request.META['HTTP_REFERER'])
