@@ -62,24 +62,14 @@ class ActiveCoursesByUserListView(LoginRequiredMixin, generic.ListView):
 
 @login_required
 def addtolist(request, pk):
-    #print("Primary key of the course")
-    #print(pk)
     course = get_object_or_404(Course, pk=pk)
-    #print(course.title)
-    #print("Logged in user")
-    #print(request.user)
     current_user = request.user
     current_user = User.objects.get(username=current_user)
     current_course = Course.objects.get(title=course.title)
 
     count = MyCourse.objects.filter(active=current_user, course=current_course).count()
-    #print(count)
     if count==0:
         add = MyCourse(active=current_user, course=current_course, status='i')
         add.save()
-        messages.success(request, "List updated!")
-        #print("mphke")
-    #else:
-        #print("leitourgei")
-    
+        messages.success(request, "List updated!")    
     return redirect('my-active')

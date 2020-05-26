@@ -3,9 +3,18 @@
 {% block title %} Create an Account {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <form method="POST" class="form-group">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-success"> Register </button>
-    </form>
+    {% if user.is_authenticated %}
+        <p>You are already registered!</p>
+        <p>If you want to create a new account make sure are logged out first!</p>
+        <a href="{% url 'index' %}"></a>
+    {% else %}
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success"> Register </button>
+        </form>
+    {% endif %}
+
+    {{form.errors}}
+    
 {% endblock %}
