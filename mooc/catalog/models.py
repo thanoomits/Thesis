@@ -47,7 +47,7 @@ class Postedby(models.Model):
         verbose_name_plural = "Posted by"
     
     op = models.ForeignKey(User, on_delete=models.CASCADE)
-    courses = models.ForeignKey(Course, on_delete=models.CASCADE)
+    courses = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     posted_date = models.DateField(auto_now_add=True)
     last_modified_date = models.DateField(auto_now=True)
     
@@ -59,7 +59,7 @@ class Postedby(models.Model):
     
 class MyCourse(models.Model):
     active = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     last_accessed = models.DateField(auto_now=True)
 
     CURRENT_STATUS = (

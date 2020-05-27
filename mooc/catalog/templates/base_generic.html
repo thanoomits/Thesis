@@ -8,26 +8,85 @@
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+  <style>
+
+    
+    body{
+      background-color: #ebeff5;
+    }
+
+  
+  </style>
   <!--<img src="{% static 'images/morty.png' %}"> -->
 </head>
 <body>
+  {% include 'catalog/navbar.html' %}
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-2">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+          <style>
+          body {
+            font-family: "Lato", sans-serif;
+          }
+
+          .sidebar-nav {
+            height: 100%;
+            width: 160px;
+            position: fixed;
+            z-index: 1;
+            top: auto;
+            left: 0;
+            background-color: #222424;
+            overflow-x: hidden;
+            padding-top: 10px;
+          }
+
+          .sidebar-nav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 15px;
+            color: #c7c5c5;
+            display: block;
+          }
+
+          .sidebar-nav a:hover {
+            color: #f1f1f1;
+          }
+
+
+          </style>
 
       {% block sidebar %}
         <ul class="sidebar-nav">
-          <li><a href="{% url 'index' %}"> Home</a></li>
-          <li><a href="{% url 'courses' %}"> All courses</a></li>
-          <li><a href="{% url 'users' %}"> All teachers</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'index' %}"> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'courses' %}"> All courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'users' %}"> All teachers</a>
+          </li>
           
           {% if user.is_authenticated %}
-            <li> User: {{ user.get_username }}</li>
-            <li><a href="{% url 'my-active' %}">My Courses</a></li>
-            <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>   
+            <li>
+              <a class="nav-link active">User: {{ user.get_username }}</a>
+            </li>
+            <li>
+              <a class="nav-link active" href="{% url 'my-active' %}">My Courses</a>
+            </li>
+            <li>
+              <a class="nav-link active" href="{% url 'logout' %}?next={{request.path}}">Logout</a>
+            </li>   
           {% else %}
-            <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
-            <li><a href="{% url 'register' %}?next={{request.path}}">Sign up</a></li>  
+            <li>
+              <a class="nav-link active" href="{% url 'login' %}?next={{request.path}}">Login</a>
+            </li>
+            <li>
+              <a class="nav-link active" href="{% url 'register' %}?next={{request.path}}">Sign up</a>
+            </li>  
           {% endif %} 
         </ul>
      {% endblock %}
@@ -64,4 +123,7 @@
   </ul>
   {% endif %}
 </body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>
