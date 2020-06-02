@@ -77,3 +77,13 @@ def addtolist(request, pk):
     else:
         messages.error(request,"This Course is already in your list!")
         return redirect(request.META['HTTP_REFERER'])
+
+@login_required
+def deletefromlist(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+    current_user = request.user
+    current_user = User.objects.get(username=current_user)
+    current_course = Course.objects.get(title=course.title)
+    MyCourse.objects.get(active=current_user,course=current_course).delete()
+
+    return redirect(request.META['HTTP_REFERER'])
