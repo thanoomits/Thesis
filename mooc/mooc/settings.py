@@ -124,6 +124,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+MEDIA_URL = '/images/'
+
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

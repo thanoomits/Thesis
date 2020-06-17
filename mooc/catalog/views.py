@@ -25,7 +25,6 @@ def index(request):
 
 class CourseListView(generic.ListView):
     model = Course
-    paginate_by = 2
 
 class CourseDetailView(generic.DetailView):
     model = Course
@@ -52,7 +51,6 @@ class PostedbyDelete(DeleteView):
 class ActiveCoursesByUserListView(LoginRequiredMixin, generic.ListView):
     model = MyCourse
     template_name = 'catalog/mycourse_list_active_user.html'
-    paginate_by = 2
 
     def get_queryset(self):
         my_user = self.request.user

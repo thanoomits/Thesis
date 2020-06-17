@@ -1,22 +1,22 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>Active Courses</h1>
+    <div class="container">
+      <div class="text-center">
+        <h1><strong>My Course List</strong></h1>
+      </div>
 
     {% if mycourse_list %}
-    <ul>
-
       {% for myco in mycourse_list %} 
-      <li>
-        <a href="{% url 'course-detail' myco.course.pk %}">{{myco.course.title}}</a> (Last accessed: {{ myco.last_accessed }}) 
+      <div class="jumbotron">
+        <p><a href="{% url 'course-detail' myco.course.pk %}"><strong>{{myco.course.title}}</strong></a><em> (Last accessed: {{ myco.last_accessed }})</em></p>
         {% if user.is_authenticated %}
-            <a href="{% url 'delete-course-from-list' myco.course.pk %}">Delete from List!</a>
+            <a href="{% url 'delete-course-from-list' myco.course.pk %}" class="btn btn-md btn-danger" role="button">Delete from List!</a>
         {% endif %}       
-      </li>
+      </div>
       {% endfor %}
-    </ul>
-
     {% else %}
       <p>There are no active Courses.</p>
-    {% endif %}       
+    {% endif %} 
+    </div>      
 {% endblock %}

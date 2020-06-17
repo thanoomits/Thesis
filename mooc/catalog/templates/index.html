@@ -1,14 +1,192 @@
 {% extends "base_generic.html" %}
-
+{% load static %}
 {% block content %}
-  <h1>MOOC Home</h1>
-  <p>Welcome to MOOC, a website developed by <em>Me</em>!</p>
-  <h2>Dynamic content</h2>
-  <p>The MOOC has the following record counts:</p>
-  <ul>
-    <li><strong>Courses:</strong> {{ num_courses }}</li>
-    <li><strong>Teachers:</strong> {{ num_users }}</li>
-  </ul>
+<!-- Image slider -->
+  <div id="slides" class="carousel slide" data-ride="carousel" data-interval="7000">
+    <ol class="carousel-indicators">
+        <li data-target="#slides" data-slide-to="0" class="active"></li>
+        <li data-target="#slides" data-slide-to="1"></li>
+        <li data-target="#slides" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="{% static 'images/welcome2.png' %}" alt="First slide">
+            <div class="carousel-caption text-center">
+              <h1>Welcome to Level Up</h1>
+              <h3>A MOOC with gamification elements</h3>
+              <a class="btn btn-outline-light btn-lg" href="#">Sign up</a>
+            </div>
+        </div>
+      <!-- Slide 2 -->
+        <div class="carousel-item">
+            <img class="d-block w-100" src="{% static 'images/lookaround.png' %}" alt="Second slide">
+            <div class="carousel-caption text-center">
+              <h1>Explore our Courses</h1>
+              <h3>A MOOC with gamification elements</h3>
+              <a class="btn btn-outline-light btn-lg" href="#">Sign up</a>
+            </div>
+        </div>
+      <!-- Slide 3 -->
+        <div class="carousel-item">
+            <img class="d-block w-100" src="{% static 'images/retro1.png' %}" alt="Third slide">
+        </div>
+        <a class="carousel-control-prev" href="#slides" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
+  </div>
+<!-- End of the image slider -->
+<div id="howitworks" class="offset">
+  <div class="jumbotron container-fluid">
 
-  <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+    <div class="container-fluid padding">
+      <div class="row welcome text-center">
+        <div class="col-12">
+          <h1 class="heading"><strong>How it works</strong></h1>
+          <div class="heading-underline"></div>
+        </div>
+        <hr>
+        <div class="col-12"><p></p><p></p><p></p>
+          <p class="lead">This is a website which i created from my thesis.
+            <br>It is based on what is wish i had when i was learning on my own.</p>
+        </div>
+      </div>
+    </div>
+
+      <div class="row align-items-center">
+
+        <div class="col-sm-6">
+          <div class="howitworks">
+            <p><strong>Step 1:</strong> Create your account!
+            <br><i class="fas fa-laptop"></i></p>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="howitworks">
+            <p><strong>Step 2:</strong> We provide courses from many different fields, so take a look around.
+              <br><i class="fas fa-laptop"></i></p>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="howitworks">
+            <p><strong>Step 3:</strong> Add the course you want to study to your list with a click of a button!
+              <br><i class="fas fa-laptop"></i></p>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="howitworks">
+            <p><strong>Step 4:</strong> You are now ready to start studying! Have fun and remember to take breaks!
+              <br><i class="fas fa-laptop"></i></p>
+          </div>
+        </div>
+
+        
+      </div>  
+  </div>  
+</div>
+
+<div id="fields" class="offset">
+
+  <div class="col-12 text-center">
+    <h1 class="heading">Our fields</h1>
+    <div class="heading-underline"></div>
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col col-md-3">
+      <div class="card text-center text-white bg-secondary mb-3" style="width: 18rem;">
+        <!-- <img class="card-img-top" src="{% static 'images/logo5.png' %}"> -->
+        <div class="card-body">
+          <h5 class="card-title">Physics</h5>
+          <p class="card-text">We have a wide variety of courses, exploring things from kinetic power to nuclear fusion.</p>
+          <a href="#" class="btn btn-primary">See more</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-md-3">
+      <div class="card text-center text-white bg-secondary mb-3" style="width: 18rem;">
+        
+        <div class="card-body">
+          <h4 class="card-title">Computer Science</h4>
+          <p class="card-text">Intro to C++, Python, Html, are only some of our available courses.</p>
+          <a href="#" class="btn btn-primary">See more</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-md-3">
+      <div class="card text-center text-white bg-secondary mb-3" style="width: 18rem;">
+     
+        <div class="card-body">
+          <h5 class="card-title">Mathematics</h5>
+          <p class="card-text">Starting with calculus and analytic geometry to advanced mathimatics.</p>
+          <a href="#" class="btn btn-primary">See more</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="community">
+  <div class="container-fluid" class="offset">
+    <div class="text-center">
+        
+      <h1 class="heading">The Community</h1>
+      <div class="heading-underline"></div>
+      <p class="lead">Level Up, has the following record counts:</p>
+      <ul>
+        <li><strong>Courses:</strong> {{ num_courses }}</li>
+        <li><strong>Teachers:</strong> {{ num_users }}</li>
+      </ul>
+      <h4 class="heading">Need help?</h4>
+      <p class="lead">You can find posts, questions or even answers, by using our <strong><a href="#">forum</a></strong>!</p>
+      <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+    </div>
+  </div>
+</div>
+
+
+<div id="contact" class="offset">
+
+  <footer>
+    <div class="row justify-content-center">
+      <div class="col-md-5 text-center">
+        <img src="{% static 'images/logo6.png'%}">
+        <p>At the core this is a project made with django 3.</p>
+        <strong>Contact info</strong>
+        <p>(888) 888-8888888<br>email.@levelup.com</p>
+        
+        <a href="" target="_blank"><i class="fab fa-facebook-square fa-3x"></i></a>
+        <a href="" target="_blank"><i class="fab fa-twitter-square fa-3x"></i></a>
+        <a href="" target="_blank"><i class="fab fa-github-square fa-3x"></i></a>
+      </div>
+
+      <hr class="socket">
+      &copy; Level Up Theme.
+
+    </div>
+  </footer>
+
+</div>
+
+
+
+
+
+
 {% endblock %}
+
+

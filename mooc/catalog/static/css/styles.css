@@ -1,5 +1,149 @@
-.sidebar-nav {
-    margin-top: 20px;
+body {
+    overflow-x: hidden;
+}
+
+.offset::before {
+    height: 4rem;
+    margin-top: -4rem;
+    content: "";
+    display: block;
+}
+
+.navbar {
+    font-weight: 700;
+    font-size: .9rem;
+    opacity: 0.9;
+}
+
+.navbar-brand img{
+    height: 1.8rem;
+}
+
+.navbar-nav li{
+    padding-right: 0.7rem;
+}
+
+.navbar-dark .navbar-nav .navbar-link {
+    padding-top: 0.8rem;
+    color: white;
+}
+
+.navbar-dark .navbar-nav .navbar-link.active,
+.navbar-dark .navbar-nav .navbar-link:hover {
+    color: wheat;
+}
+
+
+.carousel-caption {
+    position: absolute;
+    top: 38%;
+    text-transform: uppercase;
+    right: 0;
+    left: 0;
+    transform: inherit;
+}
+
+.carousel-caption h1 {
+    font-size: 3.8rem;
+    font-weight: 700;
+    letter-spacing: .3rem;
+    text-shadow: .1rem .1rem .8rem black;
+    padding-bottom: 1rem;
+}
+
+.carousel-caption h3 {
+    font-size: 2rem;
+    text-shadow: .1rem .1rem .5rem black;
+    padding-bottom: 1.6rem;
+}
+
+h1.heading {
+    font-size: 2.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 1.9rem;
+}
+
+.heading-underline {
+    width: 3rem;
+    height: .2rem;
+    background-color: slategrey;
+    margin: 0 auto 2rem;
+}
+@media (min-width: 380px) {
+  .carousel-caption h3 {
+      font-size: 1em;
+    }
+  .carousel-caption h1 {
+      font-size: 1.1em;
+    }
+  .h1.heading {
+      font-size: 1.1em;
+    }
+}
+@media (min-width: 576px) { 
+  .carousel-caption h3 {font-size: 1.1em;}
+  .carousel-caption h1 {font-size: 1.3em;}
+  .h1.heading {font-size: 1.3em;}
+}
+@media (min-width: 768px) {
+  .carousel-caption h3 {font-size: 1.2em;}
+  .carousel-caption h1 {font-size: 1.4em;}
+  .h1.heading {font-size: 1.4em;}
+}
+@media (min-width: 992px) {
+  .carousel-caption h3 {font-size: 1.3em;}
+  .carousel-caption h1 {font-size: 1.5em;}
+  .h1.heading {font-size: 1.5em;}
+}
+@media (min-width: 1200px) {
+  .carousel-caption h3 {font-size: 2em;}
+  .carousel-caption h1 {font-size: 3.8em;}
+  .h1.heading {font-size: 2.9em;} 
+}
+
+.howtiworks img {
+    max-width: 100%;
+
+}
+
+.row.no-padding [class*=col-] {
     padding: 0;
-    list-style: none;
+}
+
+footer {
+    background-color: #40474e;
+    color: white;
+    padding: 2rem 0 3rem;
+    margin-top: 2rem;
+}
+
+footer img {
+    height: 4rem;
+    margin: 1.5rem 0    ;
+}
+
+footer a {
+    color: white;
+}
+
+footer i.fab {
+    margin: 1.2rem .5rem 0 0;
+}
+
+hr.socket {
+    border-top: .2rem solid #666b71;
+    width: 100%;
+}
+
+.lead {
+    padding-bottom: 3rem;
+}
+
+.fields {
+    margin-top: 100px;
+}
+
+.community{
+    margin-top: 5rem;
 }
