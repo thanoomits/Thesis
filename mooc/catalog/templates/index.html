@@ -15,7 +15,10 @@
             <div class="carousel-caption text-center">
               <h1>Welcome to Level Up</h1>
               <h3>A MOOC with gamification elements</h3>
-              <a class="btn btn-outline-light btn-lg" href="#">Sign up</a>
+              {% if user.is_authenticated %}
+              {% else %}
+                <a class="btn btn-outline-light btn-lg" href="{% url 'register' %}?next={{request.path}}">Sign up</a>
+              {% endif %}
             </div>
         </div>
       <!-- Slide 2 -->
@@ -24,7 +27,6 @@
             <div class="carousel-caption text-center">
               <h1>Explore our Courses</h1>
               <h3>A MOOC with gamification elements</h3>
-              <a class="btn btn-outline-light btn-lg" href="#">Sign up</a>
             </div>
         </div>
       <!-- Slide 3 -->
@@ -53,39 +55,47 @@
         </div>
         <hr>
         <div class="col-12"><p></p><p></p><p></p>
-          <p class="lead">This is a website which i created from my thesis.
-            <br>It is based on what is wish i had when i was learning on my own.</p>
+          <p class="lead">This is a website which i created for my thesis.
+            <br>It is based on what i wish i had when i was learning on my own.</p>
         </div>
       </div>
     </div>
 
       <div class="row align-items-center">
 
-        <div class="col-sm-6">
+        <div class="col-sm-6 row-sm-6">
           <div class="howitworks">
-            <p><strong>Step 1:</strong> Create your account!
-            <br><i class="fas fa-laptop"></i></p>
+            <div class="text-center">
+              <p><strong>Step 1: </strong> Create your account!
+              <br><i class="fas fa-laptop fa-2x"></i></p>
+            </div>
           </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-6 row-sm-6">
           <div class="howitworks">
-            <p><strong>Step 2:</strong> We provide courses from many different fields, so take a look around.
-              <br><i class="fas fa-laptop"></i></p>
+            <div class="text-center">
+              <p><strong>Step 2: </strong> We provide courses from many different fields,<br> so take a look around.
+              <br><i class="fab fa-readme fa-2x"></i></p>
+            </div>
           </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-6 row-sm-6">
           <div class="howitworks">
-            <p><strong>Step 3:</strong> Add the course you want to study to your list with a click of a button!
-              <br><i class="fas fa-laptop"></i></p>
+            <div class="text-center">
+              <p><strong>Step 3: </strong> Add the course you want to study to your list <br> with a click of a button!
+              <br><i class="fas fa-check-square fa-2x"></i></p>
+            </div>
           </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-6 row-sm-6">
           <div class="howitworks">
-            <p><strong>Step 4:</strong> You are now ready to start studying! Have fun and remember to take breaks!
-              <br><i class="fas fa-laptop"></i></p>
+            <div class="text-center">
+              <p><strong>Step 4: </strong> You are now ready to start studying!<br> Have fun and remember to take breaks!
+              <br><i class="fas fa-gamepad fa-3x"></i></p>
+            </div>
           </div>
         </div>
 
@@ -103,18 +113,18 @@
 
   <div class="row justify-content-center">
 
-    <div class="col col-md-3">
+    <div class="col col-lg-2">
       <div class="card text-center text-white bg-secondary mb-3" style="width: 18rem;">
-        <!-- <img class="card-img-top" src="{% static 'images/logo5.png' %}"> -->
+        
         <div class="card-body">
-          <h5 class="card-title">Physics</h5>
-          <p class="card-text">We have a wide variety of courses, exploring things from kinetic power to nuclear fusion.</p>
+          <h4 class="card-title">Physics</h4>
+          <p class="card-text">We have a wide variety of courses, exploring things from kinetic energy to nuclear fusion.</p>
           <a href="#" class="btn btn-primary">See more</a>
         </div>
       </div>
     </div>
 
-    <div class="col col-md-3">
+    <div class="col col-lg-2">
       <div class="card text-center text-white bg-secondary mb-3" style="width: 18rem;">
         
         <div class="card-body">
@@ -125,12 +135,34 @@
       </div>
     </div>
 
-    <div class="col col-md-3">
+    <div class="col col-lg-2">
       <div class="card text-center text-white bg-secondary mb-3" style="width: 18rem;">
      
         <div class="card-body">
-          <h5 class="card-title">Mathematics</h5>
-          <p class="card-text">Starting with calculus and analytic geometry to advanced mathimatics.</p>
+          <h4 class="card-title">Mathematics</h4>
+          <p class="card-text">Starting with calculus and analytic geometry to advanced mathematics.</p>
+          <a href="#" class="btn btn-primary">See more</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-lg-2">
+      <div class="card text-center text-white bg-secondary mb-3" style="width: 18rem;">
+        
+        <div class="card-body">
+          <h5 class="card-title">Signal, Systems & Communications</h5>
+          <p class="card-text">Analyzing info sources like audio, image, medical signals and more.</p>
+          <a href="#" class="btn btn-primary">See more</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-lg-2">
+      <div class="card text-center text-white bg-secondary mb-3" style="width: 18rem;">
+        
+        <div class="card-body">
+          <h4 class="card-title">Economics</h4>
+          <p class="card-text">Focuses on the behaviour and interactions of economic agents and how economies work.</p>
           <a href="#" class="btn btn-primary">See more</a>
         </div>
       </div>
@@ -147,12 +179,12 @@
       <h1 class="heading">The Community</h1>
       <div class="heading-underline"></div>
       <p class="lead">Level Up, has the following record counts:</p>
-      <ul>
-        <li><strong>Courses:</strong> {{ num_courses }}</li>
-        <li><strong>Teachers:</strong> {{ num_users }}</li>
-      </ul>
+      
+        <p><strong>We offer</strong> {{ num_courses }} different courses </p>
+        <p><strong>We currently have </strong> {{ num_users }}  active users and we keep growing.</p>
+      
       <h4 class="heading">Need help?</h4>
-      <p class="lead">You can find posts, questions or even answers, by using our <strong><a href="#">forum</a></strong>!</p>
+      <p class="lead">You can find posts, questions and most importantly answers, by using our <strong><a href="#">forum</a></strong>!</p>
       <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
     </div>
   </div>

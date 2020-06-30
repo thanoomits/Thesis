@@ -6,6 +6,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('courses/', views.CourseListView.as_view(), name='courses'),
     path('course/<int:pk>', views.CourseDetailView.as_view(), name='course-detail'),
+    path('course/<int:pk>/lessons', views.LessonsListView.as_view(), name='lesson'),
+    path('lessons/<int:pk>', views.LessonsDetailView.as_view(), name='lesson-detail'),
     path('course/<int:pk>/addtolist', views.addtolist, name='add-course-to-list'),
     path('course/<int:pk>/deletefromlist', views.deletefromlist, name='delete-course-from-list'),
     path('teachers/', views.UserListView.as_view(), name='users'),
@@ -14,4 +16,4 @@ urlpatterns = [
     path('teacher/<int:pk>/update', views.PostedbyUpdate.as_view(), name='teacher-update'),
     path('teacher/<int:pk>/delete', views.PostedbyDelete.as_view(), name='teacher-delete'),
     path('mycourses/', views.ActiveCoursesByUserListView.as_view(), name='my-active'),
-]
+] 

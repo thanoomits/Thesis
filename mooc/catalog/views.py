@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from catalog.models import User, Field, Course, Postedby, MyCourse
+from catalog.models import User, Field, Course, Postedby, MyCourse, Lessons
 from django.views import generic
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -47,6 +47,13 @@ class PostedbyUpdate(UpdateView):
 class PostedbyDelete(DeleteView):
     model = Postedby
     success_url = reverse_lazy('teachers')
+
+class LessonsListView(generic.ListView):
+    model = Lessons
+
+
+class LessonsDetailView(generic.DetailView):
+    model = Lessons
 
 class ActiveCoursesByUserListView(LoginRequiredMixin, generic.ListView):
     model = MyCourse

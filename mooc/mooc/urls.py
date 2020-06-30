@@ -22,8 +22,7 @@ from register import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('catalog/', include('catalog.urls')),
+    path('', include('catalog.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', v.register, name='register'),
-    path('', RedirectView.as_view(url='catalog/', permanent=True)),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Course, Postedby, Field, MyCourse
+from .models import User, Course, Postedby, Field, MyCourse, Lessons
 
 # Register your models here.
 
@@ -30,3 +30,5 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('last_name', 'first_name', 'born_date', 'username', 'email')
     fields = [('first_name', 'last_name'), 'username', 'email', 'born_date']
 admin.site.register(User, UserAdmin)
+
+admin.site.register(Lessons)

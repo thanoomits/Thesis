@@ -81,3 +81,33 @@ class MyCourse(models.Model):
 
     def __str__(self):
         return f'{self.course.title}'
+
+
+class Lessons(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    title = models.TextField(max_length=150 , help_text='Lesson title')
+    text = models.TextField(max_length=10000 , help_text='Helping text or other infomartion that you want on display', default='')
+    arxeio = models.FileField(upload_to='media')
+
+    CURRENT_STATUS = (
+        ('n', 'Not started'),
+        ('i', 'Incomplete'),
+        ('c', 'Completed'),
+    )
+
+    status = models.CharField(
+        max_length=1,
+        choices=CURRENT_STATUS,
+        blank=True,
+        default='n',
+        help_text='Courses taken'
+    )
+
+    class Meta:
+        verbose_name_plural = "Lessons"
+
+    def __str__(self):
+        return f'{self.title}'
+
+

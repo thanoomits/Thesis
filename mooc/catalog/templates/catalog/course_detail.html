@@ -3,8 +3,11 @@
 {% block content %}
     <h1>Title: {{course.title}}</h1>
 
-    <p><strong>Teacher:</strong> <a href="{% url 'user-detail' course.teacher.pk %}">{{ course.teacher.last_name }} {{ course.teacher.first_name }}</a></p> 
+    <p><strong>Teacher:</strong> <a href="{% url 'user-detail' course.teacher.id %}">{{ course.teacher.last_name }} {{ course.teacher.first_name }}</a></p> 
     <p><strong>Summary:</strong> {{ course.summary }}</p>
     <p><strong>Field:</strong> {{ course.field.all|join:", " }}</p>  
+    <p><strong>Start your lessons </strong><a href="{% url 'lesson' course.id %}">here</a>!!</p>
+
+    
 
 {% endblock content %}

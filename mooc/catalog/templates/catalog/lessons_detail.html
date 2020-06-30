@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="jumbotron container">
+    <div class="text-center">
+        <h1>Title: {{lessons.title}}</h1>
+
+        <h3>{{lessons.text}}</h3>
+
+        <embed src="/{{lessons.arxeio}}#toolbar=0&navpanes=0&scrollbar=0" width="100%" height="750" />
+        <h5><a href='/{{lessons.arxeio}}' >Download the pdf file</a></h1>
+
+        
+    </div>
+</div>
+
+<div class="jumbotron container">
+    <div class="text-center">
+        <h3>More content resources here</h3>
+        <p><a href="#">First source</a><br>
+        <a href="#">Second source</a></p>
+    </div>
+</div>
+
+{% endblock %}
