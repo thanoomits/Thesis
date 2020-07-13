@@ -1,31 +1,48 @@
 {% extends "base_generic.html" %}
 
 {% block content %}  
-<div class="container">
-    <div class="text-center">
-        <h1>{{course.title}}</h1>
-    
+<div class="gradient">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="cotitle">
+                    <h1 class="ctitle"> {{course}} <h1>
+                        
+                            <div class="teachfield">
+                                <h4><strong>Teacher: </strong> <a class="linkinfo" href="{% url 'user-detail' course.teacher.id %}">{{ course.teacher.last_name }} {{ course.teacher.first_name }}</a></h4>
+                                <h4><strong>Field: </strong> {{ course.field.all|join:", " }}</h4>  
+                            </div>
+                        
+                    <div class="sum">
+                        <div class="card-main">
+                            <h2 class="sum_o">Overview</h2>
+                            <p class="sum_p"> {{course.summary}} </p>
+                        </div>
+                    </div>
+                    <div class="card-main">
+
+                        {% if lessons_list %}
+                            {% for lessons in lessons_list %}
+                                <h3 class="mathimata">
+                                    <a class="linkmath" href="{% url 'lesson-detail' lessons.pk %}">{{lessons.title}} </a>
+                                </h3>
+                            {% endfor %}
+
+                        {% endif %} 
+
+                    </div>
+                    {% if user.is_authenticated %}
+                    {% else %}
+                        <div class="card-main">
+                            <h2 class="sum_o">Tips!</h2>
+                            <p class="sum_p">Login in order to track progress.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-
-    <div>
-        {% if lessons_list %}
-            {% for lessons in lessons_list %}
-
-                    <div class="jumbotron container">
-                        <h3>
-                            <a href="{% url 'lesson-detail' lessons.pk %}">{{lessons.title}} </a>
-                        </h3>
-                    </div>
-                
-            {% endfor %}
-
-        {% endif %}   
-        <div class="text-center"> 
-            <button class="btn btn-outline-dark btn-lg" type="button">Start this Course</button>   
-        </div>   
-    </div>
 
 {% endblock %}
 

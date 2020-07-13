@@ -16,4 +16,7 @@ urlpatterns = [
     path('teacher/<int:pk>/update', views.PostedbyUpdate.as_view(), name='teacher-update'),
     path('teacher/<int:pk>/delete', views.PostedbyDelete.as_view(), name='teacher-delete'),
     path('mycourses/', views.ActiveCoursesByUserListView.as_view(), name='my-active'),
+    path('profile/', views.view_profile, name='view-profile'),
+    path('profile/edit/', views.edit_profile, name='edit-profile'),
+    path('change-password/', views.change_password, name='change-password'),
 ] 

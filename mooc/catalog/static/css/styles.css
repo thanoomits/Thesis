@@ -160,4 +160,220 @@ hr.socket {
 
 .text-center {
     margin-bottom: 5rem;
+    margin-top: 2rem;
 }
+
+.card-main {
+    box-shadow: 0 5px 16px 0 rgba(0,0,0,0.1);
+    background-color: #fff;
+    margin-bottom: 40px;
+    padding: 40px 60px;
+    position: relative;
+    max-width: 1700px;
+
+    -webkit-box-shadow: 0px 0px 19px 3px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0px 0px 19px 3px rgba(0,0,0,0.33);
+    box-shadow: 0px 0px 19px 3px rgba(0,0,0,0.33);
+    
+}
+
+
+
+.container {
+    max-width: 1640px;
+}
+
+.offset-lg-2 {
+    margin-left: 16.6666666667%;
+}
+
+.col-lg-8 {
+    flex: 0 0 66.6666666667%;
+    max-width: 66.6666666667%;
+}
+
+.cotitle    {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.ctitle {
+    margin-top: 1.25rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #343a40;
+    font-weight: 300;
+    letter-spacing: 0.4px;
+}
+
+.sum {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.sum_h {
+    color: rgba(74,74,74,0.7);
+    margin: 0 0 10px;
+    letter-spacing: 0.3px;
+}
+
+.sum_o {
+    color: rgba(0, 0, 0, 0.7);
+    margin: 0 0 10px;
+    letter-spacing: 0.5px;
+}
+
+.sum_p {
+    color: rgba(74,74,74,0.7);
+    font-size: 1.25rem;
+    letter-spacing: 0.2px;
+}
+
+.mathimata {
+    margin-bottom: 1    0px;
+    text-align: left;
+}
+
+.linkmath {
+    background-color: #ffffff;
+    color: rgb(194, 159, 63);
+    padding: 15px 25px;
+
+    text-decoration: none;
+    display: inline-block;
+}
+.linkmath:hover{
+    color: #000000;
+    text-decoration: none;
+}
+
+.linkinfo {
+    background-color: #ffffff;
+    color: rgb(194, 159, 63);
+
+    text-decoration: none;
+    display: inline-block;
+}
+.linkinfo:hover{
+    color: #000000;
+    text-decoration: none;
+}
+
+.card-img-top {
+    width: 30px;
+}
+.teachfield {
+    background-color: #ffffff;
+    color: rgb(194, 159, 63);
+    padding: 15px 25px;
+
+    margin-bottom: 1    0px;
+    text-align: left;
+}
+
+.button {
+    border-radius: 0.2em;
+    box-shadow: 0 0.05em 0.25em 0 rgba(0,0,0,0.5);
+    color: #fff;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    margin-right: 1rem;
+}
+
+.button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    text-decoration: none;
+    text-decoration-color: none;
+    color: white;
+}
+
+.button--secondary {
+    background-color: #cc9543;
+}
+
+.button--optional {
+    background-color: #5acc43;
+}
+
+.button--remove {
+    background-color: brown;
+}
+
+.course-card-title {
+    display: flex;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.ccdt {
+    margin: 0;
+    margin-right: 0px;
+    margin-right: auto;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.25em;
+    letter-spacing: 0.2px;
+}
+
+.course-card-summary {
+    margin: 24px auto;
+    max-width: 770px;
+    letter-spacing: 0.2px;
+    font-size: 1.125rem;
+    color: rgba(74, 74, 74, 0.7);
+}
+
+.course-card-heading {
+    font-weight: 300;
+    text-align: center !important;
+    color: #cc9543;
+    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.4px;
+}
+
+.someinfo {
+    text-align: center !important;
+    font-size: 1.5rem;
+    letter-spacing: 0.3px;
+    margin-bottom: 1.5rem;
+    color: rgba(74, 74, 74, 0.7);
+}
+
+.bton {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    position: absolute;
+    left: 50%;
+  }
+
+.bton-primary {
+    left: 70%;
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }

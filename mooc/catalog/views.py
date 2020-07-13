@@ -7,6 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from catalog.forms import EditProfileForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.models import User as AuthUser
+
 # Create your views here.
 
 def index(request):
@@ -51,6 +56,18 @@ class PostedbyDelete(DeleteView):
 class LessonsListView(generic.ListView):
     model = Lessons
 
+    def get_context_data(self, **kwargs):
+        context = super(LessonsListView, self).get_context_data(**kwargs)
+        course = get_object_or_404(Course, pk=self.kwargs['pk'])
+        context['course'] = course
+        return(context)
+
+    def get_queryset(self):
+        course = get_object_or_404(Course, pk=self.kwargs['pk'])
+        
+        return self.model.objects.filter(
+            course=course.id
+        )
 
 class LessonsDetailView(generic.DetailView):
     model = Lessons
@@ -92,3 +109,44 @@ def deletefromlist(request, pk):
     MyCourse.objects.get(active=current_user,course=current_course).delete()
 
     return redirect(request.META['HTTP_REFERER'])
+
+@login_required
+def view_profile(request):
+    args = {'user': request.user}
+    return render(request, 'catalog/profile.html', args)
+
+@login_required
+def edit_profile(request):
+    if request.method=='POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/profile')
+        
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'catalog/edit_profile.html', args)
+
+@login_required
+def change_password(request):
+    form = PasswordChangeForm(user=request.user)
+    
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/profile')
+        else:
+            return redirect('/change-password')
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+
+        args = {'form': form}
+        return render(request, 'catalog/change_password.html', args)
+
+

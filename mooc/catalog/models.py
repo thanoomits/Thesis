@@ -79,6 +79,7 @@ class MyCourse(models.Model):
     class Meta:
         ordering = ['last_accessed']
 
+
     def __str__(self):
         return f'{self.course.title}'
 
