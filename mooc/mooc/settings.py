@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'catalog',
     'register',
     'crispy_forms',
+    'pinax.badges',
 ]
 
 MIDDLEWARE = [

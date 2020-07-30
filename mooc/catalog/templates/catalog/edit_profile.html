@@ -1,17 +1,13 @@
 {% extends 'base_generic.html' %}
 
+
 {% block content %}
 
 <title>Profile</title>
 <div class="container">
     <h2 class="text-center">Edit profile</h2>
     <p>
-        <!-- <form method="POST">
-            {% csrf_token %}
-            {{form.as_p}}
-            <button class="btn btn-outline-dark btn-lg" type="sumbit">Sumbit</button>
-        </form> -->
-
+      
         <form method="post">
             {% csrf_token %}
             
@@ -36,7 +32,6 @@
 
     </p>
     <p><a class="btn btn-danger" href="{% url 'change-password' %}">Change my password</a></p>
-
 
 
 </div>

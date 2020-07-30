@@ -2,6 +2,10 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User as AuthUser
 
+from django.template.defaultfilters import slugify
+from pinax.badges.base import Badge, BadgeAwarded
+from pinax.badges.registry import badges
+
 # Create your models here.
 class Field(models.Model):
     name = models.CharField(max_length=200, help_text='Enter a field (e.g. Physics) ')
@@ -90,6 +94,8 @@ class Lessons(models.Model):
     title = models.TextField(max_length=150 , help_text='Lesson title')
     text = models.TextField(max_length=10000 , help_text='Helping text or other infomartion that you want on display', default='')
     arxeio = models.FileField(upload_to='media')
+    order = models.PositiveSmallIntegerField(blank=False, null=False, default=0)
+
 
     CURRENT_STATUS = (
         ('n', 'Not started'),
@@ -107,8 +113,22 @@ class Lessons(models.Model):
 
     class Meta:
         verbose_name_plural = "Lessons"
+        ordering = ['order',]
 
     def __str__(self):
         return f'{self.title}'
+
+    def get_absolute_url(self):
+        return reverse('lesson-detail', kwargs={'pk': self.pk})
+
+
+class Experience(models.Model):
+    user = models.OneToOneField(User,on_delete = models.CASCADE)
+    exp = models.IntegerField (default = 0)
+
+    @classmethod
+    def award_exp (self, bonus):
+        self.exp += bonus
+        self.save()
 
 

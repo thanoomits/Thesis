@@ -376,4 +376,16 @@ hr.socket {
     color: #fff;
     background-color: #0069d9;
     border-color: #0062cc;
-  }
+}
+
+.bar-5 {
+    width: 50%;
+    height: 35px;
+    background-color:#cc9543;;
+    margin-bottom: auto;
+    margin-top: 5rem;
+    border-radius: 25px;
+    font-size: 1.5rem;
+}
+
+

@@ -1,5 +1,6 @@
 {% extends 'base_generic.html' %}
 
+
 {% block content %}
 
 <title>Profile</title>
@@ -16,6 +17,20 @@
     </p>
 
     <a class="btn btn-primary" href="{% url 'edit-profile' %}">Edit my profile page. </a>
+       
+            
+    <h2>Experience gained<i class="fa fa-star"></i></h2> 
+    <div class="bar-5">
+        <div class="text-center">
+            {{myexp}}
+        </div>
+    </div>
+                
+          
+        
+
+
+
 
 
 </div>

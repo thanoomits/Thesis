@@ -25,4 +25,5 @@ urlpatterns = [
     path('', include('catalog.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', v.register, name='register'),
+    path('badges/', include('pinax.badges.urls', namespace='pinax_badges')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

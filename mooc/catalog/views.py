@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from catalog.models import User, Field, Course, Postedby, MyCourse, Lessons
+from catalog.models import User, Field, Course, Postedby, MyCourse, Lessons, Experience
 from django.views import generic
+from django.db import models
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -11,6 +13,7 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from catalog.forms import EditProfileForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User as AuthUser
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -72,6 +75,12 @@ class LessonsListView(generic.ListView):
 class LessonsDetailView(generic.DetailView):
     model = Lessons
 
+    def get_context_data(self, **kwargs):
+        context = super(LessonsDetailView, self).get_context_data(**kwargs)
+        lesson = get_object_or_404(Lessons,pk=self.kwargs['pk'])
+        context['kati'] = lesson.order
+        return(context)
+
 class ActiveCoursesByUserListView(LoginRequiredMixin, generic.ListView):
     model = MyCourse
     template_name = 'catalog/mycourse_list_active_user.html'
@@ -112,7 +121,11 @@ def deletefromlist(request, pk):
 
 @login_required
 def view_profile(request):
-    args = {'user': request.user}
+    current_user = request.user
+    current_user = User.objects.get(username=current_user)
+    myexp = Experience.objects.get(user=current_user).exp   
+
+    args = {'user': request.user, 'myexp': myexp}
     return render(request, 'catalog/profile.html', args)
 
 @login_required
@@ -148,5 +161,4 @@ def change_password(request):
 
         args = {'form': form}
         return render(request, 'catalog/change_password.html', args)
-
 
