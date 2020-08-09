@@ -1,16 +1,22 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Teacher List</h1>
-  {% if postedby_list %}
-  <ul>
-    {% for postedby in postedby_list %}
-      <li>
-        <a href="{{ postedby.get_absolute_url }}">{{ postedby.op }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-    <p>There are no teachers in the site.</p>
-  {% endif %}       
+  
+  <div class="container">
+    <h1 class="course-card-heading">Our Teachers</h1>
+    <div class="row">
+      {% if postedby_list %}
+        {% for postedby in postedby_list %}
+          <div class="col-lg-8 offset-lg-2">                                
+            <div class="card-main">
+              <a href="{{ postedby.get_absolute_url }}">{{ postedby.op.first_name }} {{ postedby.op.last_name }}</a>     
+            </div>       
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>There are no teachers in the site.</p>
+      {% endif %}
+    </div>  
+  </div>
+
 {% endblock %}

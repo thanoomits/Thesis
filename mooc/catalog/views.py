@@ -39,7 +39,21 @@ class CourseDetailView(generic.DetailView):
 
 class UserListView(generic.ListView):
     model = User
-    paginate_by = 2
+
+class PostedbyListView(generic.ListView):
+    model = Postedby
+
+class PostedbyDetailView(generic.DetailView):
+    model = Postedby
+
+    def get_context_data(self, **kwargs):
+        context = super(PostedbyDetailView, self).get_context_data(**kwargs)
+        teacher = self.get_object()
+        teacher = User.objects.get(username=teacher.op.username)
+        context['teacher'] = teacher
+        context['courses'] = Course.objects.filter(teacher=teacher)
+        return(context)
+
 
 class UserDetailView(generic.DetailView):
     model = User
@@ -132,11 +146,10 @@ def view_profile(request):
 def edit_profile(request):
     if request.method=='POST':
         form = EditProfileForm(request.POST, instance=request.user)
-
         if form.is_valid():
             form.save()
-            return redirect('/profile')
-        
+            messages.success(request,f'Your profile has been updated!')
+            return redirect('/profile') 
     else:
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
@@ -153,8 +166,6 @@ def change_password(request):
             form.save()
             update_session_auth_hash(request, form.user)
             return redirect('/profile')
-        else:
-            return redirect('/change-password')
 
     else:
         form = PasswordChangeForm(user=request.user)

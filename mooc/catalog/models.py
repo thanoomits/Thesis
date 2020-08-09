@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User as AuthUser
-
+from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from pinax.badges.base import Badge, BadgeAwarded
 from pinax.badges.registry import badges
@@ -56,7 +56,7 @@ class Postedby(models.Model):
     last_modified_date = models.DateField(auto_now=True)
     
     def __str__(self):
-        return f'{self.op},{self.courses.title}'
+        return f'{self.op},{self.courses}'
     
     def get_absolute_url(self):
         return reverse('teacher-detail', kwargs={'pk': self.pk})
@@ -126,9 +126,14 @@ class Experience(models.Model):
     user = models.OneToOneField(User,on_delete = models.CASCADE)
     exp = models.IntegerField (default = 0)
 
+    def create_user_exp(sender, instance, created, **kwargs):
+        if created:
+            Experience.objects.create(user=instance)
+
     @classmethod
     def award_exp (self, bonus):
         self.exp += bonus
         self.save()
 
+    post_save.connect(create_user_exp, sender=User)
 

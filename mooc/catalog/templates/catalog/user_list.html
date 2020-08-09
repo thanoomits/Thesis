@@ -1,27 +1,22 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>User List</h1>
-  {% if user_list %}
-  <ul>
-    {% for user in user_list %}
-      <li>
-        <a href="{{ user.get_absolute_url }}">{{ user.last_name }} {{ user.first_name }}</a> 
-    {% endfor %}
-  </ul>
-  {% else %}
-    <p>There are no active users in the mooc.</p>
-  {% endif %}       
-
-
-  <div class="container-fluid">
-    <div class="row jumbotron">
-      <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
-        <p class="lead">dn 3erw</p>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-        <a href="#"><button type="button" class="btn btn-outline-secondary btn-lg">KATI</button></a>
-      </div>
-    </div>
+  
+  <div class="container">
+    <h1 class="course-card-heading">Our Teachers</h1>
+    <div class="row">
+      {% if teacher_list %}
+        {% for teacher in teacher_list %}
+          <div class="col-lg-8 offset-lg-2">                                
+            <div class="card-main">
+              <a href="{{ teacher.get_absolute_url }}">{{ teacher.last_name }} {{ teacher.first_name }}</a>     
+            </div>       
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>There are no courses in the site.</p>
+      {% endif %}
+    </div>  
   </div>
+
 {% endblock %}

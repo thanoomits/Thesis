@@ -9,7 +9,7 @@
                     <h1 class="ctitle"> {{course}} <h1>
                         
                             <div class="teachfield">
-                                <h4><strong>Teacher: </strong> <a class="linkinfo" href="{% url 'user-detail' course.teacher.id %}">{{ course.teacher.last_name }} {{ course.teacher.first_name }}</a></h4>
+                                <h4><strong>Teacher: </strong> <a class="linkinfo" href="{% url 'teacher-detail' course.teacher.id %}">{{ course.teacher.last_name }} {{ course.teacher.first_name }}</a></h4>
                                 <h4><strong>Field: </strong> {{ course.field.all|join:", " }}</h4>  
                             </div>
                         
