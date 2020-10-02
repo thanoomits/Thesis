@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Course, Postedby, Field, MyCourse, Lessons
+from .models import User, Course, Postedby, Field, MyCourse, Lessons, Profile
 
 # Register your models here.
 
@@ -8,6 +8,10 @@ from .models import User, Course, Postedby, Field, MyCourse, Lessons
 #admin.site.register(Postedby)
 #admin.site.register(Field)
 #admin.site.register(MyCourse)
+
+# admin.site.register(Experience)
+admin.site.register(Profile)
+
 
 class PostedbyAdmin(admin.ModelAdmin):
     list_display = ('op', 'posted_date', 'last_modified_date')

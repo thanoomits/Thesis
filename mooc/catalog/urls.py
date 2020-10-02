@@ -1,8 +1,20 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
+from rest_framework.routers import DefaultRouter
+
+
+
+router = DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'points', views.ProfileViewSet)
+router.register(r'lessons', views.LessonsViewSet)
+router.register(r'mycourse', views.MyCourseViewSet)
 
 urlpatterns = [
+    path('router/', include(router.urls)),
+    path('points/<int:pk>', views.get_exp),
+    path('cocourse/<int:pk>', views.complete_course),
     path('', views.index, name='index'),
     path('courses/', views.CourseListView.as_view(), name='courses'),
     path('course/<int:pk>', views.CourseDetailView.as_view(), name='course-detail'),

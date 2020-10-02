@@ -19,11 +19,16 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 from register import views as v
+from catalog import views
+
+from catalog.views import TestView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('catalog.urls')),
+    path('testview/', views.TestView, name='test'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', v.register, name='register'),
+    path('api-auth/', include('rest_framework.urls')),
     path('badges/', include('pinax.badges.urls', namespace='pinax_badges')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -379,7 +379,7 @@ hr.socket {
 }
 
 .bar-5 {
-    width: 50%;
+    align-items: center;
     height: 35px;
     background-color:#cc9543;;
     margin-bottom: auto;
@@ -400,6 +400,14 @@ hr.socket {
 }
 
 .kentro {
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.profinfo {
+    font-weight: 400;
+    font-size: 1.1rem;
     text-align: center;
     margin-bottom: 2rem;
     margin-top: 2rem;

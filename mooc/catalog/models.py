@@ -122,18 +122,39 @@ class Lessons(models.Model):
         return reverse('lesson-detail', kwargs={'pk': self.pk})
 
 
-class Experience(models.Model):
-    user = models.OneToOneField(User,on_delete = models.CASCADE)
-    exp = models.IntegerField (default = 0)
+class PointsBadge(Badge):
+    slug = "points"
+    levels = [
+        "Bronze",
+        "Silver",
+        "Gold",
+    ]
+    events = [
+        "points_awarded",
+    ]
+    multiple = False
 
-    def create_user_exp(sender, instance, created, **kwargs):
-        if created:
-            Experience.objects.create(user=instance)
+    def award(self, **state):
+        user = state["user"]
+        points = user.profile.points
+        if points > 500:
+            return BadgeAwarded(level=3)
+        elif points > 50:
+            return BadgeAwarded(level=2)
+        elif points > 5:
+            return BadgeAwarded(level=1)
 
-    @classmethod
-    def award_exp (self, bonus):
-        self.exp += bonus
+badges.register(PointsBadge)
+
+class Profile(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete = models.CASCADE
+    )
+    points = models.IntegerField (
+        default = 0
+    )
+
+    def award_points (self, points):
+        self.points += points
         self.save()
-
-    post_save.connect(create_user_exp, sender=User)
-

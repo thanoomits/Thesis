@@ -1,4 +1,5 @@
 {% extends 'base_generic.html' %}
+{% load pinax_points_tags %}
 
 
 {% block content %}
@@ -9,11 +10,11 @@
     <div class="row">
         <div class="col-lg-8 offset-lg-2">                                
             <div class="card-main">
-                <div class="course-card-title">
-                    <p>Username: <br>{{user}}</p>
-                    <p>First Name: <br>{{user.first_name}}</p>
-                    <p>Last Name: <br>{{user.last_name}}</p>
-                    <p>Email: <br>{{user.email}}</p>
+                <div class="profinfo">
+                    <p><b>Username:</b> {{user}}</p>
+                    <p><b>First Name:</b> {{user.first_name}}</p>
+                    <p><b>Last Name:</b> {{user.last_name}}</p>
+                    <p><b>Email:</b> {{user.email}}</p>
                 </div>
                 <div class="kentro">
                     <a class="btn btn-primary" href="{% url 'edit-profile' %}">Edit my profile page. </a>
@@ -24,12 +25,14 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 offset-lg-2">                                
-            <div class="card-main">        
-                <h2>Experience gained<i class="fa fa-star"></i></h2> 
-                <div class="bar-5">
-                    <div class="text-center">
-                        {{myexp}}
+        <div class="col-lg-8 offset-lg-2">
+            <div class="text-center">                            
+                <div class="card-main">        
+                    <h2>Experience gained<i class="fa fa-star"></i></h2> 
+                    <div class="bar-5">
+                        <div class="text-center">
+                            {{mypoints}}
+                        </div>
                     </div>
                 </div>
             </div>
