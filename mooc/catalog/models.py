@@ -136,7 +136,7 @@ class PointsBadge(Badge):
 
     def award(self, **state):
         user = state["user"]
-        points = user.profile.points
+        points = user.get_profile().points
         if points > 500:
             return BadgeAwarded(level=3)
         elif points > 50:
@@ -155,6 +155,72 @@ class Profile(models.Model):
         default = 0
     )
 
+    CURRENT_LEVEL = (
+        (1, 'Level 1'),
+        (2, 'Level 2'),
+        (3, 'Level 3'),
+        (4, 'Level 4'),
+        (5, 'Level 5'),
+        (6, 'Level 6'),
+        (7, 'Level 7'),
+        (8, 'Level 8'),
+        (9, 'Level 9'),
+        (10, 'Level 10'),
+        (11, 'Level 11'),
+        (12, 'Level 12'),
+        (13, 'Level 13'),
+        (14, 'Level 14'),
+        (15, 'Level 15'),
+    )
+
+    status = models.IntegerField(
+        # max_length=2,
+        choices=CURRENT_LEVEL,
+        blank=False,
+        default=1,
+        help_text='User Level'
+    )
+
+    CURRENT_RANK = (
+        (1, 'Bronze'),
+        (2, 'Silver'),
+        (3, 'Gold'),
+        (4, 'Platinum'),
+        (5, 'Diamond'),
+        (6, 'Master'),
+        (7, 'GrandMaster'),
+    )
+
+    rank_status = models.IntegerField(
+        # max_length=1,
+        choices=CURRENT_RANK,
+        blank=False,
+        default=1,
+        help_text='User Rank'
+    )
+
+    # def status_verbose(self):
+    #     return dict(Profile.CURRENT_LEVEL)[self.status]
+
+    # def rank_verbose(self):
+    #     return dict(Profile.CURRENT_RANK)[self.rank_status]
+
+
     def award_points (self, points):
         self.points += points
         self.save()
+
+
+class Badges(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='badg/')
+
+    def __str__(self):
+        return f'{self.pk}'
+
+class UserBadge(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete = models.CASCADE
+    )
+    badg = models.ForeignKey(Badges, on_delete=models.CASCADE, null=True, blank=True)

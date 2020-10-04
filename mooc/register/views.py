@@ -3,6 +3,7 @@ from .forms import RegisterForm
 from django.contrib.auth.models import User as AuthUser
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
+from catalog.models import UserBadge, User, Badges
 
 def register(request):
     if request.user.is_authenticated:
@@ -16,6 +17,7 @@ def register(request):
                 messages.info(request, "Thanks for registering. You are now logged in as " + user)
                 new_user = authenticate(username=form.cleaned_data['username'],password=form.cleaned_data['password1'])
                 login(request, new_user)
+
                 return redirect('index')
         else:
             form = RegisterForm()

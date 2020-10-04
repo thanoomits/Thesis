@@ -23,17 +23,87 @@
         </div>
     </div>
 </div>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
-            <div class="text-center">                            
-                <div class="card-main">        
-                    <h2>Experience gained<i class="fa fa-star"></i></h2> 
+            <div class="text-center">             
+                <div class="card-main">     
+                    <h2 class="course-card-heading">How the experience system works</i></h2> 
+                    
+                        <div class="text-center">
+                          <p>For starters you earn experience points by completing lessons, quiz, videos etc. When you reach the 350 mark you will Level Up.</p>
+                          <p>When you are level 15 with your experience bar maxed out, you will promoted to the next rank!</p> 
+                          <p>Ranking system goes from Bronze -> Silver -> Gold -> Platinum -> Diamond -> Master -> GrandMaster!</p>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="text-center">              
+                <div class="card-main">
+                    {% if profile.rank_status == 1 %}
+                        <h2 class="course-card-heading">Current Rank: Bronze</h2>
+                    {% elif profile.rank_status == 2 %}
+                        <h2 class="course-card-heading">Current Rank: Silver</h2>
+                    {% elif profile.rank_status == 3 %}
+                        <h2 class="course-card-heading">Current Rank: Gold</h2>
+                    {% elif profile.rank_status == 4 %}
+                        <h2 class="course-card-heading">Current Rank: Platinum</h2>
+                    {% elif profile.rank_status == 5 %}
+                        <h2 class="course-card-heading">Current Rank: Diamond</h2>
+                    {% elif profile.rank_status == 6 %}
+                        <h2 class="course-card-heading">Current Rank: Master</h2>
+                    {% elif profile.rank_status == 7 %}
+                        <h2 class="course-card-heading">Current Rank: GrandMaster</h2>
+                    {% endif %}
+
+                    <h3>Level {{ profile.status }} <i class="far fa-star"></i></h3> 
                     <div class="bar-5">
                         <div class="text-center">
-                            {{mypoints}}
+                          {{ profile.points }} / 350   
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+.hide {
+  display: none;
+}
+
+.myDIV:hover + .hide {
+  display: block;
+  color: #cc9543;
+}
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="text-center">             
+                <div class="card-main">      
+                    <h2>My Badges</h2> 
+                
+                        <div class="text-center">
+                            
+                            {% for badge in userbadges %} 
+                                <div class="myDIV"><img src="{{ badge.badg.image.url }}" width="80" height="80"  alt="img"></div>
+                                <div class="hide">{{ badge.badg.name }}</div>
+                            {% endfor %}
+
+                        </div>
+
                 </div>
             </div>
         </div>

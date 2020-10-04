@@ -3,13 +3,23 @@ from django.dispatch import receiver
 from django.conf import settings
 from pinax.badges.registry import badges
 
-from .models import Profile, User
+from .models import Profile, User, UserBadge, Badges
 from django.db.models.signals import post_save
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def create_user_badge(sender, instance, created, **kwargs):
+    if created:
+        UserBadge.objects.create(user=instance)
+        givebadge = UserBadge.objects.get(user=instance)
+        badge = Badges.objects.get(pk=7)
+        givebadge.badg = badge
+        givebadge.save()
+        
 
 # post_save.connect(create_user_profile, sender=User)
 

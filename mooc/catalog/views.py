@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from catalog.models import User, Field, Course, Postedby, MyCourse, Lessons, PointsBadge, Profile
+from catalog.models import User, Field, Course, Postedby, MyCourse, Lessons, PointsBadge, Profile, Badges, UserBadge
 from django.views import generic
 from django.db import models
 from django.db.models import Q
@@ -156,9 +156,16 @@ def deletefromlist(request, pk):
 def view_profile(request):
     current_user = request.user
     current_user = User.objects.get(username=current_user)
-    mypoints = Profile.objects.get(user=current_user).points   
+    profile = Profile.objects.get(user=current_user)
+    userbadges = UserBadge.objects.filter(user=current_user)
+    # mypoints = Profile.objects.get(user=current_user).points   
+    # mylevel = Profile.objects.get(user=current_user).status
+    # myrank = Profile.objects.get(user=current_user).rank_status  
+    # display_level =  profile.get_status_display()
+    # display_rank =  profile.get_rank_status_display()
 
-    args = {'user': request.user, 'mypoints': mypoints}
+    # args = {'user': request.user, 'mypoints': mypoints, 'mylevel':mylevel, 'myrank':myrank}
+    args = {'user': request.user, 'profile':profile, 'userbadges':userbadges}
     return render(request, 'catalog/profile.html', args)
 
 @login_required
@@ -167,8 +174,21 @@ def edit_profile(request):
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request,f'Your profile has been updated!')
-            
+            messages.success(request,f'Your profile has been updated!') 
+
+
+            # edw badge gia to prwto lvl
+            current_user = request.user
+            current_user = User.objects.get(username=current_user)
+            number = Badges.objects.get(pk=3)
+            alreadygiven = UserBadge.objects.filter(user=current_user).filter(badg=number)
+            if alreadygiven:
+                pass
+            else:
+                badge = UserBadge(user=current_user, badg=number)
+                badge.save()
+
+
             return redirect('/profile') 
     else:
         form = EditProfileForm(instance=request.user)
@@ -242,8 +262,113 @@ def get_exp(request, pk, *args, **kwargs):
     profile = Profile.objects.get(pk=pk)
     user = profile.user
     points = profile.points + 50
-    profile.points = points
+    # profile.points = points
+    # profile.save()
+
+    if points < 350:
+        profile.points = points
+        profile.save()
+    elif points >= 350:
+        status = profile.status
+        
+        print(status)
+        if status == 15:
+            remaining = points - 350
+            profile.points = remaining
+            status = 1
+            profile.status = status
+            rank = profile.rank_status + 1
+            print(rank)
+
+            if rank==2:
+                number = Badges.objects.get(pk=5)
+                alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+                if alreadygiven:
+                    pass
+                else:
+                    badge = UserBadge(user=user, badg=number)
+                    badge.save()
+            # elif rank==3:
+            #     number = Badges.objects.get(pk=5)
+            #     alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+            #     if alreadygiven:
+            #         pass
+            #     else:
+            #         badge = UserBadge(user=user, badg=number)
+            #         badge.save()
+            # elif rank==4:
+            #     number = Badges.objects.get(pk=5)
+            #     alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+            #     if alreadygiven:
+            #         pass
+            #     else:
+            #         badge = UserBadge(user=user, badg=number)
+            #         badge.save()
+            # elif rank==5:
+            #     number = Badges.objects.get(pk=5)
+            #     alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+            #     if alreadygiven:
+            #         pass
+            #     else:
+            #         badge = UserBadge(user=user, badg=number)
+            #         badge.save()
+            # elif rank==6:
+            #     number = Badges.objects.get(pk=5)
+            #     alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+            #     if alreadygiven:
+            #         pass
+            #     else:
+            #         badge = UserBadge(user=user, badg=number)
+            #         badge.save()
+            # elif rank==7:
+            #     number = Badges.objects.get(pk=5)
+            #     alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+            #     if alreadygiven:
+            #         pass
+            #     else:
+            #         badge = UserBadge(user=user, badg=number)
+            #         badge.save()
+
+
+            profile.rank_status = rank
+            profile.save()
+
+        elif status < 15:
+            remaining = points - 350
+            profile.points = remaining
+            status = status + 1
+
+            if status == 15:
+                # edw badge gia ta 15 lvl
+                number = Badges.objects.get(pk=6)
+                alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+                if alreadygiven:
+                    pass
+                else:
+                    badge = UserBadge(user=user, badg=number)
+                    badge.save()
+
+            # edw badge gia to prwto lvl
+            number = Badges.objects.get(pk=2)
+            alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+            if alreadygiven:
+                pass
+            else:
+                badge = UserBadge(user=user, badg=number)
+                badge.save()
+
+    profile.status = status
     profile.save()
+
+# badge gia to prwto lesson
+    number = Badges.objects.get(pk=4)
+    alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+    if alreadygiven:
+        pass
+    else:
+        badge = UserBadge(user=user, badg=number)
+        badge.save()
+                
 
     print(profile.points)
     print("Experience added!")
@@ -279,5 +404,14 @@ def complete_course(request, pk, *args, **kwargs):
     status.save()
 
     print(status.status)
+
+    # edw badge gia complete to ma8hma
+    number = Badges.objects.get(pk=1)
+    alreadygiven = UserBadge.objects.filter(user=user).filter(badg=number)
+    if alreadygiven:
+        pass
+    else:
+        badge = UserBadge(user=user, badg=number)
+        badge.save()
 
     return Response({"result":"success"})

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Course, Postedby, Field, MyCourse, Lessons, Profile
+from .models import User, Course, Postedby, Field, MyCourse, Lessons, Profile, Badges, UserBadge
 
 # Register your models here.
 
@@ -11,6 +11,8 @@ from .models import User, Course, Postedby, Field, MyCourse, Lessons, Profile
 
 # admin.site.register(Experience)
 admin.site.register(Profile)
+admin.site.register(Badges)
+admin.site.register(UserBadge)
 
 
 class PostedbyAdmin(admin.ModelAdmin):
@@ -36,3 +38,4 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(User, UserAdmin)
 
 admin.site.register(Lessons)
+

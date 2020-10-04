@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User as AuthUser
 from django.contrib.auth.forms import UserCreationForm
-from catalog.models import User
+from catalog.models import User, Badges, UserBadge
 
 
 class RegisterForm(UserCreationForm):
@@ -30,5 +30,4 @@ class RegisterForm(UserCreationForm):
             user.save()
             add = User(username=user.username, first_name=user.first_name, last_name=user.last_name, email=user.email)
             add.save()
-        
         return user
