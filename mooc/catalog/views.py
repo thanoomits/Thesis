@@ -41,6 +41,9 @@ def index(request):
 
     return render(request, 'index.html', context=context)
 
+def about(request):
+    return render(request,'about_page.html')
+
 class CourseListView(generic.ListView):
     model = Course
 
@@ -357,8 +360,8 @@ def get_exp(request, pk, *args, **kwargs):
                 badge = UserBadge(user=user, badg=number)
                 badge.save()
 
-    profile.status = status
-    profile.save()
+        profile.status = status
+        profile.save()
 
 # badge gia to prwto lesson
     number = Badges.objects.get(pk=4)

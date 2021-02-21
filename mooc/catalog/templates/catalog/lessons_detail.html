@@ -48,6 +48,7 @@
             <a href="#">Second source</a></p></h4>
         </div>
         
+        <div class="text-center">
             {% if lessons.order > 1 %}
                 <a class="button button--secondary" style="text-decoration: none;" href="{% url 'lesson-detail' lessons.pk|add:-1 %}">Previous Lesson</a>
             {% endif %}
@@ -57,7 +58,7 @@
             {% if lessons.order == 15 %}
                 <a onclick="CompleteCourse('{{profile.id}}','{{lessons.course}}','{{lessons.course.id}}')" class="button button--secondary" style="text-decoration: none;" href="{% url 'view-profile' %}">Complete Course</a>
             {% endif %}  
-
+        </div>
 
     </div>
 </div>

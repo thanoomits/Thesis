@@ -16,6 +16,7 @@ urlpatterns = [
     path('points/<int:pk>', views.get_exp),
     path('cocourse/<int:pk>', views.complete_course),
     path('', views.index, name='index'),
+    path('about/', views.about, name='about-page'),
     path('courses/', views.CourseListView.as_view(), name='courses'),
     path('course/<int:pk>', views.CourseDetailView.as_view(), name='course-detail'),
     path('course/<int:pk>/lessons', views.LessonsListView.as_view(), name='lesson'),
